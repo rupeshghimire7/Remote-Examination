@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+
+{% block title %} 
+Questionnaire
+{% endblock %}
+
+{% block content %} 
+
+        {% for question in questions %}
+           Q{{question.id}}.> {{question.qn}}  
+            <br>
+            =>> It's answer is : {{question.correct}}  
+            <br>
+            <br>
+        {% endfor %}
+        
+
+
+
+{% endblock %}
