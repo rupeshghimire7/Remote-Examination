@@ -18,10 +18,13 @@ class User(AbstractUser):
 
 
 class NoticeBoard(models.Model):
+    title = models.CharField(max_length=50,default="Title")
     notice = models.CharField(max_length = 1500,blank=True, default=" ")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self) -> str:
-        return self.notice[:60]
+        return self.title
 
 
 
@@ -37,6 +40,9 @@ class Question(models.Model):
 class Answer(models.Model):
     options = models.TextField(default='y')
     question = models.ForeignKey(Question ,on_delete=models.CASCADE, default="", null=False)
+
+    def __str__(self):
+        return self.question.correct
 
 
 

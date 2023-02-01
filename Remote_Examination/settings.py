@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     'exam.apps.ExamConfig',
+    'api.apps.ApiConfig',
 ]
 
 AUTH_USER_MODEL = 'exam.User'
