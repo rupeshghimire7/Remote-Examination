@@ -1,0 +1,9 @@
+*Things that are needed to learn API are:*
+
+1. EndPoints (response = requests.get(endpoint_url_1))
+2. API views.py -> JsonResponse
+3. Echo 'GET Data' -> data = byteString of JsonData -> json.loads(data)
+    to know the type of headers, you have various ways say headers, bodies request.META etc
+4. Model instance as API response
+5. model_to_dict -> (sort of serialization)
+

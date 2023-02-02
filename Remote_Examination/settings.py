@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     
     'exam.apps.ExamConfig',
     'api.apps.ApiConfig',
+    'rest_framework',
 ]
 
 AUTH_USER_MODEL = 'exam.User'
