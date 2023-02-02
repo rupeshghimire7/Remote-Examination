@@ -37,12 +37,17 @@ class Question(models.Model):
         return self.qn[:50]
 
 
+    def get_question(self):
+        return self.qn
+
+
 class Answer(models.Model):
     options = models.TextField(default='y')
     question = models.ForeignKey(Question ,on_delete=models.CASCADE, default="", null=False)
 
     def __str__(self):
         return self.question.correct
+
 
 
 

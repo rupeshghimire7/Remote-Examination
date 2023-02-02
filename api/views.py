@@ -4,6 +4,8 @@ from django.shortcuts import render
 from exam.models import *
 from django.forms.models import model_to_dict
 
+from .serializers import QuestionSerializer
+
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 # Create your views here.
@@ -11,15 +13,12 @@ from rest_framework.response import Response
 
 @api_view(["GET","POST"])
 def api_home(request, *args, **kwargs):
-    model_question = Question.objects.order_by("?").first()
+
+    instance = Question.objects.order_by("?").first()
     data = {}
-    if model_question:
-        data = model_to_dict(model_question, fields=['id','qn','correct'])
-#        json_data_str = json.dumps(data)  #serialiable
-#        return HttpResponse(json_data_str,headers={"content-type":"appl
-# "})
-        # data['id'] = model_question.id]
-        # data['question'] = model_question.qn
-        # data["correct"] = model_question.correct
-        # data["points"] = model_question.points
+    if instance:
+        data = QuestionSerializer(instance).data
+    # if model_question:
+    #     data = model_to_dict(model_question, fields=['id','qn','correct'])
+
     return Response(data) 

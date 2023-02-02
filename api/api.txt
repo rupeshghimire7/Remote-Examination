@@ -7,3 +7,8 @@
 4. Model instance as API response
 5. model_to_dict -> (sort of serialization)
 
+
+Rest Framework 
+1. View and Response 
+2. Model serializer
+3. Injest data with DRF views (post method to send data)
