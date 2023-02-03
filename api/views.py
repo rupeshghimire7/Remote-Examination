@@ -1,17 +1,15 @@
-from django.shortcuts import render
-# from django.http import JsonResponse
-# import json
-from exam.models import *
 from django.forms.models import model_to_dict
 
 from .serializers import QuestionSerializer
+from exam.models import *
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework import generics
 # Create your views here.
 
 
-@api_view(["GET","POST"])
+@api_view(["POST"])
 def api_home(request, *args, **kwargs):
 
     instance = Question.objects.order_by("?").first()
@@ -22,3 +20,13 @@ def api_home(request, *args, **kwargs):
     #     data = model_to_dict(model_question, fields=['id','qn','correct'])
 
     return Response(data) 
+
+
+class QuestionAPIView(generics.RetrieveAPIView):
+    queryset = Question.objects.all()
+    serializer_class = QuestionSerializer
+    #it has pk as lookup field
+
+# question_view = QuestionAPIView.as_view()
+
+

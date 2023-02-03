@@ -7,6 +7,7 @@ class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
         fields = [
+            'id',
             'correct',
             'points',
             # 'qn',
@@ -14,6 +15,6 @@ class QuestionSerializer(serializers.ModelSerializer):
         ]
     def get_question(self,obj):
         return obj.get_question()   #this get_question is a method in models of exam Question
-        
+
         
 
