@@ -9,17 +9,17 @@ from rest_framework import generics
 # Create your views here.
 
 
-@api_view(["POST"])
-def api_home(request, *args, **kwargs):
+# @api_view(["POST"])
+# def api_home(request, *args, **kwargs):
 
-    instance = Question.objects.order_by("?").first()
-    data = {}
-    if instance:
-        data = QuestionSerializer(instance).data
-    # if model_question:
-    #     data = model_to_dict(model_question, fields=['id','qn','correct'])
+#     instance = Question.objects.order_by("?").first()
+#     data = {}
+#     if instance:
+#         data = QuestionSerializer(instance).data
+#     # if model_question:
+#     #     data = model_to_dict(model_question, fields=['id','qn','correct'])
 
-    return Response(data) 
+#     return Response(data) 
 
 
 class QuestionAPIView(generics.RetrieveAPIView):
@@ -30,3 +30,12 @@ class QuestionAPIView(generics.RetrieveAPIView):
 # question_view = QuestionAPIView.as_view()
 
 
+class QuestionListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Question.objects.all()
+    print(queryset)
+    serializer_class = QuestionSerializer
+
+    def perform_create(self, serializer):
+        # serializer.save(user=self.request.user)
+        serializer.save()
+        print(serializer)

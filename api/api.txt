@@ -12,3 +12,7 @@ Rest Framework
 1. View and Response 
 2. Model serializer
 3. Injest data with DRF views (post method to send data)
+4. Generic Retrive API View (Class based serializationView)
+5. Create API View
+6. List API View and List Create API View
+7. 
