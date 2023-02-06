@@ -15,4 +15,5 @@ Rest Framework
 4. Generic Retrive API View (Class based serializationView)
 5. Create API View
 6. List API View and List Create API View
-7. 
+7. A combined function based view different url (/int or not) to get required thing done from same view function [api_view, Response, get_object_or_404, Http404,...]
+8. update/delete
