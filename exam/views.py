@@ -25,11 +25,8 @@ def makeQuestion(request):
 
         print(qn_form,opt1,opt2,opt3,opt4,option,correct_form)
 
-        q = Question.objects.create(qn=qn_form, correct = correct_form, points=pt)
+        q = Question.objects.create(question=qn_form, correct = correct_form, points=pt, options = json.dumps(option))
         q.save()
-
-        a = Answer.objects.create(options = json.dumps(option), question=q)
-        a.save()
         return redirect('list')
             
 
