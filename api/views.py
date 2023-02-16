@@ -6,17 +6,15 @@ from rest_framework.response import Response
 from rest_framework import generics
 
 
-# # @api_view(["POST"])
-# # def api_home(request, *args, **kwargs):
+@api_view(["GET","POST"])
+def api_home(request, *args, **kwargs):
 
-# #     instance = Question.objects.order_by("?").first()
-# #     data = {}
-# #     if instance:
-# #         data = QuestionSerializer(instance).data
-# #     # if model_question:
-# #     #     data = model_to_dict(model_question, fields=['id','qn','correct'])
-
-# #     return Response(data) 
+    instance = Question.objects.order_by("?").first()
+    data = {}
+    if instance:
+        data = QuestionSerializer(instance).data
+        
+    return Response(data) 
 
 
 # class QuestionAPIView(generics.RetrieveAPIView):

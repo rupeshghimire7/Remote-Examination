@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse, redirect
-from .models import Student, Question, Answer
-from .forms import QuestionForm, AnswerForm, StudentForm
+from .models import Student, Question
+from .forms import QuestionForm,  StudentForm
 import json
 
 # Create your views here.

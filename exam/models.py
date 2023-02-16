@@ -29,9 +29,10 @@ class NoticeBoard(models.Model):
 
 
 class Question(models.Model):
-    qn = models.CharField(max_length=500,default="x")
-    correct = models.CharField(max_length=200,default="x")
-    points = models.PositiveIntegerField(default=1, validators=[MaxValueValidator(2), MinValueValidator(1)])
+    question = models.CharField(max_length=500,default="x",blank=False)
+    correct = models.CharField(max_length=200,default="x", blank=False)
+    options = models.TextField(default='options')
+    points = models.PositiveIntegerField(default=1, validators=[MaxValueValidator(5), MinValueValidator(1)])
 
     def __str__(self) -> str:
         return self.qn[:50]
@@ -39,16 +40,6 @@ class Question(models.Model):
 
     def get_question(self):
         return self.qn
-
-
-class Answer(models.Model):
-    options = models.TextField(default='y')
-    question = models.ForeignKey(Question ,on_delete=models.CASCADE, default="", null=False)
-
-    def __str__(self):
-        return self.question.correct
-
-
 
 
 class Student(models.Model):
