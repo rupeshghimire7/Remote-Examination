@@ -22,3 +22,16 @@ class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
         fields = '__all__'
+
+
+
+class StudentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Student
+        fields = "__all__"
+        
+
+class NoticeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = NoticeBoard
+        fields = '__all__'
