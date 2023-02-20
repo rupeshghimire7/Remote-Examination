@@ -15,6 +15,21 @@ class User(AbstractUser):
     REQUIRED_FIELDS = []
 
 
+class Subject(models.Model):
+    subject = models.CharField(max_length=50,null=True,blank=False)
+    # SubCode = models.CharField(max_length=50,null=True)
+
+    def __str__(self):
+        return self.name
+
+
+class College(models.Model):
+    college = models.CharField(max_length=200,null=True,blank=False)
+    code = models.CharField(max_length=5,null=True,blank=False)
+
+    def __str__(self):
+        return f"{self.code} ----->>  {self.college} "
+
 
 
 class NoticeBoard(models.Model):
@@ -52,18 +67,3 @@ class Student(models.Model):
     def __str__(self):
         return self.name\
 
-
-class Subject(models.Model):
-    subject = models.CharField(max_length=50,null=True,blank=False)
-    # SubCode = models.CharField(max_length=50,null=True)
-
-    def __str__(self):
-        return self.name
-
-
-class College(models.Model):
-    college = models.CharField(max_length=200,null=True,blank=False)
-    code = models.CharField(max_length=5,null=True,blank=False)
-
-    def __str__(self):
-        return f"{self.code} ----->>  {self.college} "
