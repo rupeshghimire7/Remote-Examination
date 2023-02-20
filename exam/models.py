@@ -45,7 +45,6 @@ class NoticeBoard(models.Model):
 
 class Question(models.Model):
     question = models.CharField(max_length=500,default="x",blank=False)
-    subject = models.ForeignKey(Subject, on_delete=models.CASCADE,null=True)
     correct = models.CharField(max_length=200,default="x", blank=False)
     options = models.TextField(default='options')
     points = models.PositiveIntegerField(default=1, validators=[MaxValueValidator(5), MinValueValidator(1)])
@@ -59,7 +58,6 @@ class Question(models.Model):
 
 
 class Student(models.Model):
-    subjects = models.ManyToManyField(Subject,)
     name = models.CharField(max_length=100, blank=False, null=False)
     age = models.IntegerField(default=16)
     roll = models.CharField(default='PAS076BCT025',max_length=12)
@@ -67,5 +65,5 @@ class Student(models.Model):
 
 
     def __str__(self):
-        return self.name
+        return self.name\
 
