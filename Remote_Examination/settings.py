@@ -46,6 +46,8 @@ INSTALLED_APPS = [
 
 AUTH_USER_MODEL = 'exam.User'
 
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

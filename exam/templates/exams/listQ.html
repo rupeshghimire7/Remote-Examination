@@ -7,15 +7,22 @@ Questionnaire
 
 {% block content %} 
 
-        {% for question in questions %}
+        {% comment %} {% for question in questions %}
            Q{{question.id}}.> {{question.qn}}  
             <br>
             =>> It's answer is : {{question.correct}}  
             <br>
             <br>
-        {% endfor %}
+        {% endfor %} {% endcomment %}
         
-
+        {% for mcq in mcqs %}
+        <p>{{ mcq.question }}</p>
+        <ul>
+        {% for option in mcq.options %}
+        <li><input type="radio" name="{{ mcq.question }}" value="{{ option }}"> {{ option }}</li>
+        {% endfor %}
+        </ul>
+        {% endfor %}
 
 
 {% endblock %}
