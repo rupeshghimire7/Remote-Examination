@@ -4,7 +4,7 @@ from django.contrib import messages
 from .models import *
 from .forms import *
 import json
-from faker import Faker
+
 
 
 # Create your views here.
@@ -68,25 +68,4 @@ def listQuestion(request):
     return render(request,'exams/listQ.html',{'questions':questions})
 
 
-def generate_mcqs(Question):
-    fake = Faker()
-    mcqs = []
-    for i in range(Question):
-        question = fake.sentence(nb_words=8, variable_nb_words=True, ext_word_list=None)
-        correct_form = fake.word()
-        options = [correct_form]
-        while len(options) < 5:
-            option = fake.word()
-            if option not in options:
-                options.append(option)
-        mcqs.append({
-            'question': question,
-            'options': options,
-            'correct_answer': correct_form
-        })
-    return mcqs
 
-# def mcq_view(request):
-#     mcqs = Question(10)  # generate 10 MCQs
-#     context = {'mcqs': mcqs}
-#     return render(request, 'mcqs.html', context)
