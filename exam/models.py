@@ -59,11 +59,11 @@ class Question(models.Model):
 
 class Student(models.Model):
     name = models.CharField(max_length=100, blank=False, null=False)
-    age = models.IntegerField(default=16)
+    # age = models.IntegerField(default=16)
     roll = models.CharField(default='PAS076BCT025',max_length=12)
 
 
 
     def __str__(self):
-        return self.name\
+        return self.name
 
