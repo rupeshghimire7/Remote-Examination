@@ -5,14 +5,14 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 class User(AbstractUser):
-    name = models.CharField(max_length=200,null=True)
-    username = models.CharField(max_length=100,null=True)
-    bio = models.TextField(null=True)
-    email = models.EmailField(unique=True,null=True)
-    avatar = models.ImageField(null=True, default='avatar.svg')
+    username = models.CharField(max_length=100,blank=False,default="username")
+    email = models.EmailField(unique=True,default="student@example.com",blank=False)
+    password = models.CharField(max_length=10,blank=False)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
+    def __self__(self):
+        return self.username
 
 
 class Subject(models.Model):
@@ -61,7 +61,8 @@ class Student(models.Model):
     name = models.CharField(max_length=100, blank=False, null=False)
     # age = models.IntegerField(default=16)
     roll = models.CharField(default='PAS076BCT025',max_length=12)
-
+    avatar = models.ImageField(null=True, default='avatar.svg')
+    bio = models.TextField(null=True)
 
 
     def __str__(self):

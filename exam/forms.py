@@ -1,6 +1,6 @@
 from django import forms
 from django.core import validators
-from .models import Question, Student
+from .models import *
 
 
 
@@ -15,6 +15,10 @@ class QuestionForm(forms.ModelForm):
         model = Question
         fields = '__all__'
 
+class CreateUserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username','email','password']
 
 
 # class UserForm(forms.ModelForm):
