@@ -7,4 +7,5 @@ urlpatterns = [
     path('listQ',views.listQuestion, name='list'),
     path('studentlogin',views.studentlogin, name='studentlogin'),
     path('studentsignup',views.CreateUser,name='studentsignup'),
+    path('exam',  views.generate_questions, name='exam'),
 ]

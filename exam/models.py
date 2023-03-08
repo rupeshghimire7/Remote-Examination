@@ -43,27 +43,32 @@ class NoticeBoard(models.Model):
 
 
 LEVEL_CHOICES = (
-    ('H','Hard'),
-    ('M','Medium'),
-    ('E','Easy'),
+    ('Hard','Hard'),
+    ('Medium','Medium'),
+    ('Easy','Easy'),
 )
 class Question(models.Model):
-    level = models.CharField(max_length = 1, choices=LEVEL_CHOICES,default="M",blank=False)
+    level = models.CharField(max_length = 6, choices=LEVEL_CHOICES,default="Medium",blank=False)
     question = models.CharField(max_length=500,default="x",blank=False)
     correct = models.CharField(max_length=200,default="x", blank=False)
     options = models.TextField(default='options')
     points = models.PositiveIntegerField(default=1, validators=[MaxValueValidator(5), MinValueValidator(1)])
 
     def __str__(self) -> str:
-        return self.qn[:50]
+        return self.question[:50]
 
+class Level_Question(models.Model):
+    level = models.CharField(max_length = 6, choices=LEVEL_CHOICES,default="Medium",blank=False)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    
 
-    def get_question(self):
-        return self.qn
+    def __str__(self):
+        return self.level
+        
 
 class Exam(models.Model):
     title = models.CharField(max_length=255)
-    questions = models.ManyToManyField(Question)
+    questions = models.ManyToManyField(Level_Question)
     
     def __str__(self):
         return self.title

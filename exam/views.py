@@ -4,7 +4,7 @@ from django.contrib import messages
 from .models import *
 from .forms import *
 import json
-
+import random
 
 
 # Create your views here.
@@ -38,6 +38,7 @@ def studentlogin(request):
 
 def makeQuestion(request):
     if request.method == 'POST':
+        level = request.POST.get('level')
         qn_form = request.POST.get('question')
         opt1 = request.POST.get('option1')
         opt2 = request.POST.get('option2')
@@ -48,13 +49,11 @@ def makeQuestion(request):
         correct_form = opt1
         option = [opt1, opt2, opt3, opt4]
 
-        print(qn_form,opt1,opt2,opt3,opt4,option,correct_form)
+        print(level,qn_form,opt1,opt2,opt3,opt4,option,correct_form)
 
-        q = Question.objects.create(question=qn_form, correct = correct_form, points=pt, options = json.dumps(option))
+        q = Question.objects.create(level=level,question=qn_form, correct = correct_form, points=pt, options = json.dumps(option))
         q.save()
         return redirect('list')
-            
-
     return render(request, 'exams/prepareQ.html')
 
 
@@ -68,13 +67,30 @@ def listQuestion(request):
     return render(request,'exams/listQ.html',{'questions':questions})
 
 
-def generate_exam(request):
-    hard_questions = Question.objects.filter(level='H').order_by('?')[:10]
-    medium_questions = Question.objects.filter(level='M').order_by('?')[:20]
-    easy_questions = Question.objects.filter(level='E').order_by('?')[:20]
-    total_questions = list(hard_questions) + list(medium_questions) + list(easy_questions)
-    exam = Exam.objects.create(title='Sample Exam')
-    exam.questions.add(*total_questions)
-    return render(request,'exams.html',{'exam':exam})
+# def generate_exam(request):
+#     hard_questions = Question.objects.filter(level='H').order_by('?')[:10]
+#     medium_questions = Question.objects.filter(level='M').order_by('?')[:20]
+#     easy_questions = Question.objects.filter(level='E').order_by('?')[:20]
+#     total_questions = list(hard_questions) + list(medium_questions) + list(easy_questions)
+#     exam = Exam.objects.create(title='Sample Exam')
+#     exam.questions.add(*total_questions)
+#     return render(request,'exams.html',{'exam':exam})
 
+def generate_questions(request):
+    num_questions = 50
+    hard_ratio=0.2
+    medium_ratio=0.4
+    easy_ratio=0.4
+    num_hard = int(num_questions * hard_ratio)
+    num_medium = int(num_questions * medium_ratio)
+    num_easy = int(num_questions * easy_ratio)
+
+    hard_questions = Level_Question.objects.filter(level='Hard').order_by('?')[:num_hard]
+    medium_questions = Level_Question.objects.filter(level='Medium').order_by('?')[:num_medium]
+    easy_questions = Level_Question.objects.filter(level='Easy').order_by('?')[:num_easy]
+
+    question_list = list(hard_questions) + list(medium_questions) + list(easy_questions)
+    exam = Exam.objects.create(title='Sample Exam')
+    exam.questions.add(*question_list)
+    return render(request,'exams/exam.html',{'exam':exam})
 

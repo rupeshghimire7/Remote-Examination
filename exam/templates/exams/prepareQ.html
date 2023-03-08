@@ -7,7 +7,6 @@ Prepare Question
 {% endblock %}
 
 {% block content %} 
-
 <form method="POST" action="{% url 'prepare' %}">
     {% csrf_token %}
     <label>Question:</label>
@@ -41,9 +40,5 @@ Prepare Question
     <input type="submit">
     <br>
 
-</form>
-
-
-
-
+</form> 
 {% endblock %}

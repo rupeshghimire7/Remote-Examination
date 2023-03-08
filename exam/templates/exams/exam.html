@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
+{% block title %}
+Welcome to exam
+{% endblock title %}
 
-{% block content %}
-  <h1>{{ exam.title }}</h1>
+{% comment %} {% block content %}
   <form method="post">
     {% csrf_token %}
     {% for question in exam.questions.all %}
@@ -17,3 +19,18 @@
       </label>
       <label>
         <input type="radio" name="answer_{{ question.id }}">
+        {% endblock content %} {% endcomment %}
+
+        {% block content %}
+        <h1>{{ exam.title }}</h1>
+      
+        {% for question in exam.questions.all %}
+          <div class="question">
+            <p>{{ question.question }}</p>
+            <ul>
+                {% for option in exam.questions.options %}{% endfor %}
+              <li><input type="radio" name="{{  }}">{{ question.options }}</li>
+            </ul>
+          </div>
+        {% endfor %}
+      {% endblock %}
