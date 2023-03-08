@@ -61,6 +61,13 @@ class Question(models.Model):
     def get_question(self):
         return self.qn
 
+class Exam(models.Model):
+    title = models.CharField(max_length=255)
+    questions = models.ManyToManyField(Question)
+    
+    def __str__(self):
+        return self.title
+    
 
 class Student(models.Model):
     name = models.CharField(max_length=100, blank=False, null=False)

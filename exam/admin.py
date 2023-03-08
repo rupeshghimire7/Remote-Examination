@@ -1,4 +1,4 @@
-from .models import NoticeBoard, Student,User, Question, College, Subject
+from .models import NoticeBoard, Student,User, Question, College, Subject,Exam
 from django.contrib import admin
 
 # Register your models here.
@@ -10,3 +10,4 @@ admin.site.register(User)
 
 admin.site.register(College)
 admin.site.register(Subject)
+admin.site.register(Exam)

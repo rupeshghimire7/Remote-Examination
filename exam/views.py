@@ -68,4 +68,13 @@ def listQuestion(request):
     return render(request,'exams/listQ.html',{'questions':questions})
 
 
+def generate_exam(request):
+    hard_questions = Question.objects.filter(level='H').order_by('?')[:10]
+    medium_questions = Question.objects.filter(level='M').order_by('?')[:20]
+    easy_questions = Question.objects.filter(level='E').order_by('?')[:20]
+    total_questions = list(hard_questions) + list(medium_questions) + list(easy_questions)
+    exam = Exam.objects.create(title='Sample Exam')
+    exam.questions.add(*total_questions)
+    return render(request,'exams.html',{'exam':exam})
+
 

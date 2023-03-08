@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>{{ exam.title }}</h1>
+  <form method="post">
+    {% csrf_token %}
+    {% for question in exam.questions.all %}
+      <h3>{{ question.text }}</h3>
+      <label>
+        <input type="radio" name="answer_{{ question.id }}" value="A"> A. {{ question.answer }}
+      </label>
+      <label>
+        <input type="radio" name="answer_{{ question.id }}" value="B"> B. {{ question.answer }}
+      </label>
+      <label>
+        <input type="radio" name="answer_{{ question.id }}" value="C"> C. {{ question.answer }}
+      </label>
+      <label>
+        <input type="radio" name="answer_{{ question.id }}">
