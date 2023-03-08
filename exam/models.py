@@ -42,8 +42,13 @@ class NoticeBoard(models.Model):
         return self.title
 
 
-
+LEVEL_CHOICES = (
+    ('H','Hard'),
+    ('M','Medium'),
+    ('E','Easy'),
+)
 class Question(models.Model):
+    level = models.CharField(max_length = 1, choices=LEVEL_CHOICES,default="M",blank=False)
     question = models.CharField(max_length=500,default="x",blank=False)
     correct = models.CharField(max_length=200,default="x", blank=False)
     options = models.TextField(default='options')
