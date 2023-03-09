@@ -6,6 +6,18 @@ from rest_framework.response import Response
 from rest_framework import generics
 
 
+@api_view(["GET"])
+def api_list(request, *args, **kwargs):
+    all_api_urls = {
+        "List": "/api/list/",
+        "Detail View": "/api/detail/<str:pk>/",
+        "Create": "/api/create/",
+        "Update": "/api/update/<str:pk>/",
+        "Delete": "/api/delete/<str:pk>/",
+    }
+    return Response(all_api_urls)
+
+
 @api_view(["GET","POST"])
 def api_home(request, *args, **kwargs):
 
@@ -34,3 +46,14 @@ def api_home(request, *args, **kwargs):
 #         # serializer.save(user=self.request.user)
 #         serializer.save()
 #         print(serializer)
+
+
+@api_view(["GET"])
+def exam_paper(request):
+    allQuestions = []
+    easy = Question.objects.filter(level='E').order_by('?')[:25]
+    medium = Question.objects.filter(level='M').order_by('?')[:15]
+    hard = Question.objects.filter(level='H').order_by('?')[:10]
+    allQuestions.append(easy,medium,hard)
+    print(allQuestions)
+    return Response(allQuestions)
