@@ -55,5 +55,7 @@ def exam_paper(request):
     medium = Question.objects.filter(level='M').order_by('?')[:15]
     hard = Question.objects.filter(level='H').order_by('?')[:10]
     allQuestions.append(easy,medium,hard)
-    print(allQuestions)
-    return Response(allQuestions)
+    serializer = QuestionSerializer(allQuestions, many=True)
+    print("All Questions: \n",allQuestions)
+    print("Serializer Data :\n",serializer.data)
+    return Response(serializer.data)
