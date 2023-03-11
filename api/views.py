@@ -54,6 +54,6 @@ def exam_paper(request):
     easy = Question.objects.filter(level='E').order_by('?')[:25]
     medium = Question.objects.filter(level='M').order_by('?')[:15]
     hard = Question.objects.filter(level='H').order_by('?')[:10]
-    allQuestions.append(easy,medium,hard)
+    allQuestions.append([easy,medium,hard])
     print(allQuestions)
     return Response(allQuestions)

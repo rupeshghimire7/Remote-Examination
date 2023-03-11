@@ -43,14 +43,14 @@ def makeQuestion(request):
         opt2 = request.POST.get('option2')
         opt3 = request.POST.get('option3')
         opt4 = request.POST.get('option4')
-        pt = request.POST.get('points')
+        level = request.POST.get('level')
 
         correct_form = opt1
         option = [opt1, opt2, opt3, opt4]
 
         print(qn_form,opt1,opt2,opt3,opt4,option,correct_form)
 
-        q = Question.objects.create(question=qn_form, correct = correct_form, points=pt, options = json.dumps(option))
+        q = Question.objects.create(question=qn_form, correct = correct_form, level=level, options = json.dumps(option))
         q.save()
         return redirect('list')
             
