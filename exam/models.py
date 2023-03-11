@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from django.core.validators import MaxValueValidator, MinValueValidator
+# from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 
@@ -17,14 +17,15 @@ class User(AbstractUser):
 
 class Subject(models.Model):
     subject = models.CharField(max_length=50,null=True,blank=False)
-    # SubCode = models.CharField(max_length=50,null=True)
+    SubCode = models.CharField(max_length=10,null=True)
+    year = models.CharField(max_length=3,null=True,blank=False,default='1st')
 
     def __str__(self):
         return self.name
 
 
-class College(models.Model):
-    college = models.CharField(max_length=200,null=True,blank=False)
+class College(User,models.Model):
+    institute = models.CharField(max_length=200,null=True,blank=False)
     code = models.CharField(max_length=5,null=True,blank=False)
 
     def __str__(self):
@@ -41,25 +42,31 @@ class NoticeBoard(models.Model):
     def __str__(self) -> str:
         return self.title
 
-
+level = {
+    ('E','Easy'),
+    ('M','Medium'),
+    ('H','Hard')
+}
 
 class Question(models.Model):
     question = models.CharField(max_length=500,default="x",blank=False)
     correct = models.CharField(max_length=200,default="x", blank=False)
     options = models.TextField(default='options')
-    points = models.PositiveIntegerField(default=1, validators=[MaxValueValidator(5), MinValueValidator(1)])
+    level = models.CharField(max_length=1, default='E', blank=False)
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE, null=True)
+    # points = models.PositiveIntegerField(default=1, validators=[MaxValueValidator(5), MinValueValidator(1)])
 
     def __str__(self) -> str:
-        return self.qn[:50]
+        return self.question[:50]
 
 
     def get_question(self):
-        return self.qn
+        return self.question
 
 
-class Student(models.Model):
+class Student(User,models.Model):
     name = models.CharField(max_length=100, blank=False, null=False)
-    # age = models.IntegerField(default=16)
+    age = models.IntegerField(default=16)
     roll = models.CharField(default='PAS076BCT025',max_length=12)
     avatar = models.ImageField(null=True, default='avatar.svg')
     bio = models.TextField(null=True)
