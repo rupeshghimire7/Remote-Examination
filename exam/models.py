@@ -21,15 +21,15 @@ class Subject(models.Model):
     year = models.CharField(max_length=3,null=True,blank=False,default='1st')
 
     def __str__(self):
-        return self.name
+        return self.subject
 
 
-class College(User,models.Model):
+class College(models.Model):
     institute = models.CharField(max_length=200,null=True,blank=False)
     code = models.CharField(max_length=5,null=True,blank=False)
 
     def __str__(self):
-        return f"{self.code} ----->>  {self.college} "
+        return f"{self.code} ----->>  {self.institute} "
 
 
 
@@ -64,7 +64,7 @@ class Question(models.Model):
         return self.question
 
 
-class Student(User,models.Model):
+class Student(models.Model):
     name = models.CharField(max_length=100, blank=False, null=False)
     age = models.IntegerField(default=16)
     roll = models.CharField(default='PAS076BCT025',max_length=12)
